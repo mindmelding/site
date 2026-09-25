@@ -8,6 +8,7 @@ window.PROJECTS = [
   {
     title: "Loyalty MCP",
     date: "09.2026",
+    url: "https://mindmelding.dev/lmcp/",
     text: "Tells an AI assistant whether a card charge could have earned restaurant rewards. Give it a bank descriptor and it names the merchant, finds the loyalty program and estimates what went unclaimed.",
     plate: "grid",
     words: ["resolve", "lookup", "live", "inferred", "unknown", "signup", "rebate", "descriptor"],
