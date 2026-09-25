@@ -5,8 +5,10 @@
 // Slugs come from projects.js, using the same rule as window.projectSlug there.
 const SITE_ORIGIN = "https://mindmelding.dev";
 const slugify = (title) => title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+// A projects.js entry with no `title` or `text` (both optionally captured by regex) must
+// still render as the generic page, not throw — so coerce missing values to "" first.
 const escapeHtml = (str) =>
-  str.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  String(str ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 async function knownSlugs(env, url) {
   const res = await env.ASSETS.fetch(new URL("/projects.js", url));
