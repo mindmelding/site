@@ -1,7 +1,19 @@
 // Newest first. `plate` picks the generated artwork: waves, rings, halftone, script, bars, grid.
 // `ink: "light"` prints dark ink on a paper plate; default is a dark plate.
-// Add `url` to link the title.
+// Each project gets a page at /<slug>: `slug` defaults to the title in lowercase with dashes.
+// Optional: `url` (the live thing), `docs` (path of its docs, e.g. "/docs-kit/docs/"), `repo` (public GitHub "owner/name").
+window.projectSlug = (p) => p.slug || p.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 window.PROJECTS = [
+  {
+    title: "docs-kit",
+    date: "09.2026",
+    text: "Turns a folder of Markdown into a docs site with tabs, search, dark mode and a plain-text copy for AI agents. Every project here gets its docs from it.",
+    plate: "grid",
+    words: ["callout", "steps", "tabs", "search", "llms.txt", "sidebar", "base", "build"],
+    docs: "/docs-kit/docs/",
+    repo: "mindmelding/docs-kit",
+  },
   {
     title: "Ownerside",
     date: "09.2026",
@@ -11,9 +23,9 @@ window.PROJECTS = [
     words: ["occupancy", "owner", "april", "nightly", "letter", "oceanside", "booked", "rate"],
   },
   {
-    title: "App Spend Audit",
+    title: "Swap My Stack",
     date: "09.2026",
-    text: "Finds the Shopify apps a store pays for and no longer uses, and puts the bill line next to the missing code.",
+    text: "Shows what a Shopify store's apps cost, what replaces them for less, and walks the switch one step at a time, from export to cancelling the old app.",
     plate: "bars",
   },
   {

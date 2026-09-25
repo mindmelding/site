@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/docs-kit/docs", "destination": "https://docs-kit-docs.sean-mancillas-2.workers.dev/docs-kit/docs/" },
+    { "source": "/docs-kit/docs/:path*/", "destination": "https://docs-kit-docs.sean-mancillas-2.workers.dev/docs-kit/docs/:path*/" },
+    { "source": "/docs-kit/docs/:path*", "destination": "https://docs-kit-docs.sean-mancillas-2.workers.dev/docs-kit/docs/:path*" },
+    { "source": "/:slug", "destination": "/project.html" },
+    { "source": "/:slug/", "destination": "/project.html" }
+  ]
+}

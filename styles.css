@@ -120,7 +120,34 @@ a:hover { color: var(--hover); }
 .project-head a,
 .project-head span.name { color: var(--title-text); }
 .project-head a:hover { color: var(--hover); }
-.project-head a::after { content: " ↗"; font-size: .75em; }
+.project-head a::after { content: " →"; font-size: .75em; }
+
+/* Project page */
+.back { display: inline-block; color: var(--title-text); font-size: .9rem; margin-bottom: 2rem; }
+.back:hover { color: var(--hover); }
+.project-page .project-head { font-size: 1.1rem; }
+.project-page h1 { margin: 0; font-size: inherit; font-weight: 500; color: var(--text-color); }
+.project-page .lede { margin-top: .9rem; line-height: 1.45; }
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: 1.6rem;
+  padding: 0;
+  list-style: none;
+}
+.project-links a {
+  display: inline-block;
+  padding: .45rem .8rem;
+  border: 1px solid var(--bar-line);
+  border-radius: var(--border-radius);
+  font-size: .85rem;
+  color: var(--text-color);
+}
+.project-links a:hover { border-color: var(--title-text); color: var(--hover); }
+.project-links a.primary { background: var(--paper); color: var(--background); border-color: var(--paper); }
+.project-links a.primary:hover { background: var(--hover); color: var(--background); }
+.missing .lede { color: var(--title-text); }
 
 .date {
   font-family: var(--font-mono);
