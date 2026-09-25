@@ -1,5 +1,5 @@
 ---
-title: Autonomous build sandbox has no network, so wrangler dev cannot verify Worker changes
+title: "Resolved: the build loop blocked wrangler dev (an allowlist gap, not a network limit)"
 date: 2026-09-25
 category: workflow-issues
 module: site-worker
@@ -9,10 +9,14 @@ severity: medium
 applies_when:
   - "Verifying a change to worker.js or another Cloudflare Worker in an autonomous build-loop session (Linear-triggered build, CI agent) rather than an interactive laptop session"
   - "A plan or issue prescribes `npx wrangler dev` + `curl` as the verification method"
-tags: [cloudflare-workers, wrangler, sandbox, network, verification]
+tags: [cloudflare-workers, wrangler, sandbox, verification, resolved]
+status: resolved
+resolved_by: "idea-to-ship 4d3b719 (BUO-40)"
 ---
 
-# Autonomous build sandbox has no network, so wrangler dev cannot verify Worker changes
+# Resolved: the build loop blocked wrangler dev (an allowlist gap, not a network limit)
+
+> **Resolved 2026-09-25 (BUO-40).** The cause was the build workflow's command allowlist, not the network: GitHub's runners have normal network access. The build and review workflows now allow shell commands (idea-to-ship commit 4d3b719). **Use `npx wrangler dev` and `curl http://localhost:8787/...` to verify Worker changes.** Fall back to the harness below only if a command is actually refused, and say so in the PR. Kept for history; BUO-42's build followed the old advice and skipped `wrangler dev` without trying it.
 
 ## Context
 
