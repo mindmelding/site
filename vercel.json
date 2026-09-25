@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/:path*", "destination": "https://mindmelding.dev/:path*", "permanent": true }
+  ]
+}

@@ -14,14 +14,11 @@
 
     const head = document.createElement("div");
     head.className = "project-head";
-    const name = document.createElement(p.url ? "a" : "span");
+    // Every project has its own page; the live link and docs live there.
+    const name = document.createElement("a");
     name.className = "name";
     name.textContent = p.title;
-    if (p.url) {
-      name.href = p.url;
-      name.target = "_blank";
-      name.rel = "noopener";
-    }
+    name.href = "/" + window.projectSlug(p);
     const date = document.createElement("span");
     date.className = "date";
     date.textContent = p.date;
