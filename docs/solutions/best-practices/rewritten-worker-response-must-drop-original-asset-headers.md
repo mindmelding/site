@@ -21,7 +21,7 @@ That looks like "preserve the original headers," but it silently keeps three val
 - `content-length` — now wrong, because the spliced-in `<title>`/meta tags change the byte length. A wrong `Content-Length` can truncate or otherwise corrupt what the client receives.
 - `etag` / `last-modified` — now describe content the response no longer serves, which can make a CDN or browser treat a genuinely different response as unchanged and skip re-fetching it.
 
-Nothing in this failure mode throws or fails a build: the code reads correctly (same template, same headers, plus insertions), and it was only caught by construction review before shipping, not by any test — this repo has no test runner (`wrangler.jsonc`, no `package.json`/test config) and no `wrangler dev` access in this sandbox (see `docs/solutions/workflow-issues/sandboxed-build-cannot-run-wrangler-dev.md`), so verification here is manual harness/`curl` inspection of the response head, which would not obviously surface a Content-Length mismatch either.
+Nothing in this failure mode throws or fails a build: the code reads correctly (same template, same headers, plus insertions), and it was only caught by construction review before shipping, not by any test — this repo has no test runner (`wrangler.jsonc`, no `package.json`/test config). Builds can run `wrangler dev` plus `curl` against localhost (a build-workflow allowlist gap that blocked this was fixed 2026-09-25; see `docs/solutions/workflow-issues/sandboxed-build-cannot-run-wrangler-dev.md`), but a `curl` inspection of the response head would not obviously surface a Content-Length mismatch either, unless you specifically diff it against the original asset's headers.
 
 ## Guidance
 
