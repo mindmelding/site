@@ -21,7 +21,11 @@ async function knownSlugs(env, url) {
 }
 
 function sitemapXml(slugs) {
-  const urls = [SITE_ORIGIN + "/", ...[...slugs].map((slug) => `${SITE_ORIGIN}/${slug}`)];
+  // Only slugs the /<slug> route itself would match — keeps every <loc> resolvable
+  // and XML-safe without escaping, even if a manual `slug:` in projects.js strays
+  // outside [a-z0-9-] (that project just won't 200 for /<slug> either).
+  const validSlugs = [...slugs].filter((slug) => /^[a-z0-9-]+$/.test(slug));
+  const urls = [SITE_ORIGIN + "/", ...validSlugs.map((slug) => `${SITE_ORIGIN}/${slug}`)];
   const entries = urls.map((loc) => `  <url><loc>${loc}</loc></url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries}\n</urlset>\n`;
 }
