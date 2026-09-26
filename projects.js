@@ -23,6 +23,7 @@ window.PROJECTS = [
   {
     title: "Swap My Stack",
     date: "09.2026",
+    url: "https://mindmelding.dev/swapmystack/",
     text: "Shows what a Shopify store's apps cost, what replaces them for less, and walks the switch one step at a time, from export to cancelling the old app.",
     plate: "bars",
   },
