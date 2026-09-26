@@ -39,6 +39,8 @@ window.PROJECTS = [
   {
     title: "Summit",
     date: "09.2026",
+    url: "https://mindmelding.dev/summit/",
+    docs: "/summit/docs/",
     text: "Climb a real mountain one neighborhood walk at a time. Ask for 1,000 feet of climbing from where you stand and Summit plans walkable routes, tracks the gain, and banks it toward a peak you choose.",
     plate: "rings",
     ink: "light",
