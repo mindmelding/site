@@ -42,8 +42,8 @@
     links.append(li);
   };
   if (p.docs) add("Read the docs", p.docs, true, false);
-  if (p.url) add("Open " + p.title + " ↗", p.url, !p.docs, true);
-  if (p.repo) add("Code on GitHub ↗", "https://github.com/" + p.repo, false, true);
+  if (p.url) add("Open " + p.title + " ↗\uFE0E", p.url, !p.docs, true);
+  if (p.repo) add("Code on GitHub ↗\uFE0E", "https://github.com/" + p.repo, false, true);
 
   page.append(canvas, head, el("p", "lede", p.text));
   if (links.children.length) page.append(links);
