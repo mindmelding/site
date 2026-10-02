@@ -565,7 +565,7 @@
       </div>
 
       <figure class="paper reveal" style="transition-delay:.1s" aria-label="Example rewards report">
-        <h4>Your Restaurant Rewards Check</h4>
+        <h4>Your Rewards Check</h4>
         <p><strong>Bottom line:</strong> In this batch you left about <strong class="hl">$23</strong> in rewards on the table, all at a few live programs. Local Tap House &amp; Kitchen has a solid program (~10% back), and other places you visit are worth a look.</p>
         <hr>
         <h5>Local Tap House &amp; Kitchen: worth joining</h5>
@@ -697,39 +697,42 @@
       </button>
       <span class="copy-status" id="copy-status" role="status" aria-live="polite"></span>
     </div>
-    <p class="modal-foot">Your agent sends merchant names, amounts and dates to Loyalty MCP. Nothing else is shared, and you aren't signed up for anything.</p>
+    <p class="modal-foot">Loyalty MCP is in private beta, so you'll need an API key. Your agent sends merchant names, amounts, dates and bank categories. Nothing else is shared, and you aren't signed up for anything.</p>
   </div>
 </dialog>
 
 <script>
 (function () {
-  // Prompt copy is a placeholder until the final wording is settled (TBD).
   var AGENTS = {
     muse: {
       name: 'Muse',
       letter: 'M',
       badge: 'var(--hotpink)',
-      lede: 'Paste this into Muse. It will go through your recent dining spend with Loyalty MCP and give you back your rewards report.',
-      step2: 'Paste it into a new Muse chat.',
+      lede: 'Paste this into Muse. It sets up Loyalty MCP as a connector, runs your last 90 days of bank transactions through it, and gives you back your rewards report.',
+      step2: 'Paste it into a new Muse chat. When Muse asks for the API key, enter it in the connector settings.',
       prompt:
-        'Check my restaurant rewards with Loyalty MCP.\n\n' +
-        'Look at my restaurant, bar, brewery and coffee purchases from the last 90 days. ' +
-        'For each one, send the full bank descriptor and merchant name exactly as they appear. Include bars, and leave delivery orders (DoorDash, Uber Eats, Grubhub) out.\n\n' +
-        'Then show me the report_markdown it returns, exactly as written.\n\n' +
-        "Don't sign me up for anything, and don't share my phone number, email or account numbers."
+        'Set up Loyalty MCP as a custom connector, then check my rewards.\n\n' +
+        '1. Create a custom connector named "Loyalty MCP" from this OpenAPI spec: https://loyalty-overlay.fly.dev/openapi.yaml\n' +
+        'It uses Bearer token auth. Ask me for the API key in the connector settings, not in this chat.\n\n' +
+        '2. From my connected bank accounts, take every transaction from the last 90 days, transfers included. ' +
+        'Send them all in one call to estimateRewards with grain "summary" and window_label "the last 90 days". ' +
+        'For each transaction send: name (the full bank description, unedited), merchant_name, amount (money out positive, money in negative, as Plaid has it), ' +
+        'date, and personal_finance_category. Set amount_convention to "plaid".\n\n' +
+        '3. Show me the report_markdown it returns, exactly as written.\n\n' +
+        "Don't sign me up for anything, and don't send my name, phone number, email or account numbers."
     },
     instinct: {
       name: 'Instinct',
       letter: 'I',
       badge: 'var(--butter)',
-      lede: 'Paste this into Instinct. It will run your recent dining transactions through Loyalty MCP and give you back your rewards report.',
+      lede: 'Paste this into Instinct. It will run your last 90 days of transactions through Loyalty MCP and give you back your rewards report.',
       step2: 'Paste it into a new Instinct chat.',
       prompt:
-        'Use Loyalty MCP to find the restaurant rewards I\'m missing.\n\n' +
-        'Take my dining transactions from the last 90 days (restaurants, bars, breweries, coffee) and run them through the estimate tool. ' +
-        'Pass each Plaid name as the descriptor and merchant_name as the merchant, without shortening them. Skip third-party delivery.\n\n' +
+        'Use Loyalty MCP to find the rewards I\'m missing.\n\n' +
+        'Take every transaction from the last 90 days, transfers included, and send them in one call to the estimate tool. ' +
+        'Pass each Plaid name as the descriptor and merchant_name as the merchant, without shortening them, along with amount, date and personal_finance_category.\n\n' +
         'Print the report_markdown exactly as returned. After that, I may ask follow-up questions like "How do I join?" about a specific place.\n\n' +
-        "Never enroll me in anything, and never send my phone number, email or account numbers."
+        "Never enroll me in anything, and never send my name, phone number, email or account numbers."
     }
   };
 
