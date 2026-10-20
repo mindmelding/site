@@ -6,13 +6,6 @@ window.projectSlug = (p) => p.slug || p.title.toLowerCase().replace(/[^a-z0-9]+/
 
 window.PROJECTS = [
   {
-    title: "Hey Hunnies",
-    date: "10.2026",
-    url: "https://hey-hunnies.vercel.app",
-    text: "A fan app for one creator: her videos, Instagram, tour dates and merch in one place, built so fans come back between shows. The first of our creator apps.",
-    plate: "halftone",
-  },
-  {
     title: "Buoy Desk",
     slug: "buoy",
     date: "09.2026",
