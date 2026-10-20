@@ -1,4 +1,4 @@
-// Newest first. `plate` picks the generated artwork: waves, rings, halftone, script, bars, grid.
+// Current products first, then earlier experiments. `plate` picks the generated artwork: waves, rings, halftone, script, bars, grid.
 // `ink: "light"` prints dark ink on a paper plate; default is a dark plate.
 // Each project gets a page at /<slug>: `slug` defaults to the title in lowercase with dashes.
 // Optional: `url` (the live thing), `docs` (path of its docs, e.g. "/docs-kit/docs/"), `repo` (public GitHub "owner/name").
@@ -6,19 +6,36 @@ window.projectSlug = (p) => p.slug || p.title.toLowerCase().replace(/[^a-z0-9]+/
 
 window.PROJECTS = [
   {
+    title: "Hey Hunnies",
+    date: "10.2026",
+    url: "https://hey-hunnies.vercel.app",
+    text: "A fan app for one creator: her videos, Instagram, tour dates and merch in one place, built so fans come back between shows. The first of our creator apps.",
+    plate: "halftone",
+  },
+  {
+    title: "Buoy Desk",
+    slug: "buoy",
+    date: "09.2026",
+    url: "https://buoydesk.com",
+    text: "An AI employee for independent shops in North County San Diego. It answers after-hours calls, follows up on quotes, asks for reviews and brings customers back, all for one monthly retainer. Every shop starts with a free audit.",
+    plate: "waves",
+  },
+  {
+    title: "Summit",
+    date: "09.2026",
+    url: "https://mindmelding.dev/summit/",
+    docs: "/summit/docs/",
+    text: "Climb a real mountain, one neighborhood walk at a time. Tell Summit how much climb you want and it finds walking loops from where you stand, counts every foot and banks it toward a peak you choose. Free for iPhone, with a TestFlight beta up next.",
+    plate: "rings",
+    ink: "light",
+  },
+  {
     title: "Loyalty MCP",
     date: "09.2026",
     url: "https://mindmelding.dev/lmcp/",
     text: "Tells an AI assistant whether a card charge could have earned restaurant rewards. Give it a bank descriptor and it names the merchant, finds the loyalty program and estimates what went unclaimed.",
     plate: "grid",
     words: ["resolve", "lookup", "live", "inferred", "unknown", "signup", "rebate", "descriptor"],
-  },
-  {
-    title: "Buoy",
-    date: "09.2026",
-    url: "https://buoydesk.com",
-    text: "An AI operating partner for independent businesses in North County San Diego. One monthly retainer covers after-hours calls, reviews, repeat business, quote follow-up and trimming the software bill.",
-    plate: "waves",
   },
   {
     title: "Swap My Stack",
@@ -35,14 +52,5 @@ window.PROJECTS = [
     ink: "light",
     words: ["welcome", "regulars", "noticed", "on the house", "grant", "honest", "first shift", "voice"],
     repo: "mindmelding/front-of-house",
-  },
-  {
-    title: "Summit",
-    date: "09.2026",
-    url: "https://mindmelding.dev/summit/",
-    docs: "/summit/docs/",
-    text: "Climb a real mountain one neighborhood walk at a time. Ask for 1,000 feet of climbing from where you stand and Summit plans walkable routes, tracks the gain, and banks it toward a peak you choose.",
-    plate: "rings",
-    ink: "light",
   },
 ];
