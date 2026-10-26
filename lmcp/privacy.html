@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loyalty MCP privacy</title>
+<meta name="description" content="What the free Loyalty MCP server receives, keeps and never does.">
+<style>
+  :root { --ink: #222; --muted: #555; --bg: #fbf1f1; --pink: #ff6e99; }
+  @media (prefers-color-scheme: dark) { :root { --ink: #eee; --muted: #bbb; --bg: #1b1718; } }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 "DM Sans", system-ui, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 48px 16px 64px; }
+  h1 { font-size: 34px; line-height: 1.2; margin: 0 0 8px; }
+  h2 { font-size: 20px; margin: 32px 0 8px; }
+  p, li { color: var(--muted); }
+  a { color: var(--pink); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Loyalty MCP privacy</h1>
+  <p>Last updated October 20, 2026. Applies to the free server at <code>https://loyalty-overlay.fly.dev/mcp</code>.</p>
+
+  <h2>What it receives</h2>
+  <p>Whatever your assistant sends in a tool call: usually card or bank descriptions, amounts, dates and categories, or a question. It needs nothing else, and you shouldn't send names, phone numbers, emails or account numbers.</p>
+
+  <h2>What it keeps</h2>
+  <ul>
+    <li>It does not store or log what you send. Your lines are matched in memory and the answer is returned.</li>
+    <li>Each request writes one log line: time, tool name, status, response time, and a salted one-way hash of your IP address. The IP itself is held in memory only, for rate limiting.</li>
+    <li>Usage counts (tool name, status and that same hash) go to PostHog so we can see how many people use it each week. No arguments, results or IP addresses are sent.</li>
+    <li>Our host, Fly.io, may keep its own short-lived platform logs.</li>
+  </ul>
+
+  <h2>What it never does</h2>
+  <ul>
+    <li>Sign you up for any rewards program, or contact any restaurant for you.</li>
+    <li>Sell or share what you send, or build a profile of you.</li>
+    <li>Connect to your bank. Your assistant decides what to send.</li>
+  </ul>
+
+  <h2>Where the restaurant data comes from</h2>
+  <p>Public restaurant pages and public loyalty signup pages, rechecked weekly. Statuses can be wrong or out of date; estimates are illustrative.</p>
+
+  <h2>Contact</h2>
+  <p>Questions or removal requests for a restaurant listing: <a href="https://github.com/mindmelding/loyalty-mcp-public/issues">open an issue</a>.</p>
+  <p><a href="./">Back to Loyalty MCP</a></p>
+</main>
+</body>
+</html>
