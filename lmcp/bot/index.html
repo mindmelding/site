@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoyaltyOverlayBot</title>
+<meta name="description" content="What LoyaltyOverlayBot is, what it fetches, how fast, and how to block or contact it.">
+<style>
+  :root { --ink: #222; --muted: #555; --bg: #fbf1f1; --pink: #ff6e99; --code: #f3e4e6; }
+  @media (prefers-color-scheme: dark) { :root { --ink: #eee; --muted: #bbb; --bg: #1b1718; --code: #2a2324; } }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 "DM Sans", system-ui, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 48px 16px 64px; }
+  h1 { font-size: 34px; line-height: 1.2; margin: 0 0 8px; }
+  h2 { font-size: 20px; margin: 32px 0 8px; }
+  p, li, td { color: var(--muted); }
+  a { color: var(--pink); }
+  code, pre { background: var(--code); border-radius: 6px; font: 14px/1.5 "DM Mono", ui-monospace, monospace; }
+  code { padding: 1px 5px; overflow-wrap: anywhere; }
+  pre { padding: 12px 14px; overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; }
+  td { padding: 6px 8px 6px 0; vertical-align: top; border-bottom: 1px solid var(--code); }
+  td:first-child { white-space: nowrap; color: var(--ink); }
+</style>
+</head>
+<body>
+<main>
+  <h1>LoyaltyOverlayBot</h1>
+  <p>Last updated October 21, 2026. LoyaltyOverlayBot is the crawler behind <a href="https://mindmelding.dev/lmcp/">Loyalty MCP</a>, a free tool that tells people whether a restaurant they already visit has a rewards program they could join.</p>
+
+  <h2>How to recognize it</h2>
+  <table>
+    <tr><td>User agent</td><td><code>LoyaltyOverlayBot/1.0 (+https://mindmelding.dev/lmcp/bot)</code></td></tr>
+    <tr><td>Signatures</td><td>Requests carry HTTP message signatures (<a href="https://datatracker.ietf.org/doc/draft-meunier-web-bot-auth-architecture/">Web Bot Auth</a>, Ed25519) with <code>Signature-Agent: "https://loyalty-overlay.fly.dev"</code>. Our public key is at <a href="https://loyalty-overlay.fly.dev/.well-known/http-message-signatures-directory"><code>https://loyalty-overlay.fly.dev/.well-known/http-message-signatures-directory</code></a>.</td></tr>
+    <tr><td>Runs from</td><td>Fly.io (region sjc). We don't use proxies or rotate IP addresses.</td></tr>
+  </table>
+
+  <h2>What it fetches</h2>
+  <ul>
+    <li>A restaurant's public rewards signup data on Toast (<code>www.toasttab.com/&lt;restaurant&gt;/loyalty/sign-up-data</code>). We keep only three facts: whether rewards are on, the earn rate shown, and the public signup link. We use the restaurant phone number on that page only to match records.</li>
+    <li>Toast's public restaurant directory pages (<code>toast.app/cities/&lt;city&gt;/all</code>) and restaurant sitemaps (<code>toast.app/r/sitemap-index.xml</code>), to learn which restaurants exist.</li>
+  </ul>
+  <p>It only sends GET requests. It never logs in, never touches account, ordering or checkout pages, never submits forms and never collects anything about diners.</p>
+
+  <h2>How fast</h2>
+  <ul>
+    <li>Signup data: once a week, one request at a time, at most one request per second.</li>
+    <li>Directory pages and sitemaps: once a week, one page every 1 to 3 minutes (a few hundred pages a week).</li>
+  </ul>
+
+  <h2>Rules it follows</h2>
+  <ul>
+    <li>It reads <code>robots.txt</code> before crawling a site and skips anything disallowed for <code>LoyaltyOverlayBot</code> or <code>*</code>. If <code>robots.txt</code> can't be read, it doesn't crawl that site.</li>
+    <li>If a site blocks it, shows a challenge or CAPTCHA, or answers 403, 429 or 503, it stops the whole run and waits until next week. It never solves CAPTCHAs or tries to get around a block.</li>
+    <li>If a site owner asks us to stop, we stop.</li>
+  </ul>
+
+  <h2>Blocking it</h2>
+  <pre>User-agent: LoyaltyOverlayBot
+Disallow: /</pre>
+
+  <h2>Contact</h2>
+  <p>To ask us to stop, slow down, or remove a restaurant: <a href="https://github.com/mindmelding/loyalty-mcp-public/issues">open an issue</a>.</p>
+  <p><a href="https://mindmelding.dev/lmcp/">Back to Loyalty MCP</a> · <a href="https://mindmelding.dev/lmcp/privacy.html">Privacy</a></p>
+</main>
+</body>
+</html>
