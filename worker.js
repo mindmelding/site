@@ -19,8 +19,9 @@ async function knownSlugs(env, url) {
     const slug = entry.match(/^\s*slug:\s*"([^"]+)"/m)?.[1];
     const title = entry.match(/^\s*title:\s*"([^"]+)"/m)?.[1];
     const text = entry.match(/^\s*text:\s*"([^"]+)"/m)?.[1];
+    const url = entry.match(/^\s*url:\s*"([^"]+)"/m)?.[1];
     const key = slug || (title && slugify(title));
-    if (key) projects.set(key, { title, text });
+    if (key) projects.set(key, { title, text, url });
   }
   return projects;
 }
@@ -30,7 +31,11 @@ function sitemapXml(projects) {
   // and XML-safe without escaping, even if a manual `slug:` in projects.js strays
   // outside [a-z0-9-] (that project just won't 200 for /<slug> either).
   const validSlugs = [...projects.keys()].filter((slug) => /^[a-z0-9-]+$/.test(slug));
-  const urls = [SITE_ORIGIN + "/", ...validSlugs.map((slug) => `${SITE_ORIGIN}/${slug}`)];
+  // A project that lives on its own path here (e.g. /lmcp/) is listed at that path too.
+  const ownPages = [...projects.values()]
+    .map((p) => p.url)
+    .filter((u) => typeof u === "string" && /^https:\/\/mindmelding\.dev\/[a-z0-9\/-]+$/.test(u));
+  const urls = [...new Set([SITE_ORIGIN + "/", ...validSlugs.map((slug) => `${SITE_ORIGIN}/${slug}`), ...ownPages])];
   const entries = urls.map((loc) => `  <url><loc>${loc}</loc></url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries}\n</urlset>\n`;
 }
