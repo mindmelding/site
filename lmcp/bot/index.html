@@ -6,14 +6,14 @@
 <title>LoyaltyOverlayBot</title>
 <meta name="description" content="What LoyaltyOverlayBot is, what it fetches, how fast, and how to block or contact it.">
 <style>
-  :root { --ink: #222; --muted: #555; --bg: #fbf1f1; --pink: #ff6e99; --code: #f3e4e6; }
-  @media (prefers-color-scheme: dark) { :root { --ink: #eee; --muted: #bbb; --bg: #1b1718; --code: #2a2324; } }
+  :root { --ink: #222; --muted: #555; --bg: #fbf1f1; --hotpink: #ff6e99; --pink-text: #c2185b; --code: #f3e4e6; }
+  @media (prefers-color-scheme: dark) { :root { --ink: #eee; --muted: #bbb; --bg: #1b1718; --pink-text: #ff6e99; --code: #2a2324; } }
   body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 "DM Sans", system-ui, sans-serif; }
   main { max-width: 680px; margin: 0 auto; padding: 48px 16px 64px; }
   h1 { font-size: 34px; line-height: 1.2; margin: 0 0 8px; }
   h2 { font-size: 20px; margin: 32px 0 8px; }
   p, li, td { color: var(--muted); }
-  a { color: var(--pink); }
+  a { color: var(--pink-text); }
   code, pre { background: var(--code); border-radius: 6px; font: 14px/1.5 "DM Mono", ui-monospace, monospace; }
   code { padding: 1px 5px; overflow-wrap: anywhere; }
   pre { padding: 12px 14px; overflow-x: auto; }
@@ -21,6 +21,24 @@
   td { padding: 6px 8px 6px 0; vertical-align: top; border-bottom: 1px solid var(--code); }
   td:first-child { white-space: nowrap; color: var(--ink); }
 </style>
+<!-- PostHog (project 677157): page views with UTM tags. No cookies or local storage, no recordings. -->
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_CSLQ6YZgXfkmFEvttfxVarxLJ2vVfjQ2ZQJ4BXdHLCvN', {
+    api_host: 'https://us.i.posthog.com',
+    persistence: 'memory',
+    person_profiles: 'identified_only',
+    disable_session_recording: true,
+    autocapture: false,
+    capture_pageview: true,
+    capture_pageleave: false
+  });
+  // Our own visits and previews count as tests: add ?is_test=1, or open on localhost / a preview host.
+  posthog.register({
+    is_test: /[?&]is_test=1\b/.test(location.search) || !/^(www\.)?mindmelding\.dev$/.test(location.hostname),
+    site: 'lmcp'
+  });
+</script>
 </head>
 <body>
 <main>
