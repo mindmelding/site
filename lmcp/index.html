@@ -492,7 +492,7 @@
         </button>
       </div>
 
-      <p class="free-note reveal" style="transition-delay:.25s">Free. No API key, no signup. Also works in Claude Code, VS Code and any MCP client: <code>https://loyalty-overlay.fly.dev/mcp</code></p>
+      <p class="free-note reveal" style="transition-delay:.25s">Free. No API key, no signup. Also works in Claude Code, VS Code and any MCP client: <code>https://loyalty-overlay.fly.dev/mcp?src=site</code></p>
 
       <div class="marquee reveal" style="transition-delay:.3s" aria-hidden="true">
         <div class="marquee-track" id="marquee-track"></div>
@@ -765,7 +765,7 @@
 
 <script>
 (function () {
-  var MCP_URL = 'https://loyalty-overlay.fly.dev/mcp';
+  var MCP_URL = 'https://loyalty-overlay.fly.dev/mcp?src=site';
   var FREE_PROMPT =
         'Use the Loyalty MCP tools to check these card or bank lines for restaurant rewards I could be earning.\n\n' +
         'For each line, keep the full description exactly as printed. Call estimate_missed with all of them, then show me the report_markdown it returns, exactly as written.\n\n' +
