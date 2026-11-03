@@ -1,0 +1,16 @@
+# mindmelding
+
+> Small tools by mindmelding. Other projects are listed at https://mindmelding.dev/.
+
+## Loyalty MCP
+
+Loyalty MCP is a free remote MCP server. It tells an AI assistant which restaurants on a card or bank statement have a live rewards program, roughly what went unclaimed, and where to join. It covers 28,253 Toast restaurants in 46 states (13,326 with a live program) plus 246 national chains, and the data is rechecked weekly. It is free, with no API key and no signup.
+
+- MCP endpoint (Streamable HTTP, no auth): https://loyalty-overlay.fly.dev/mcp
+- Setup for Claude, ChatGPT and Cursor: https://mindmelding.dev/lmcp/
+- Privacy: https://mindmelding.dev/lmcp/privacy.html
+- Crawler and bot policy: https://mindmelding.dev/lmcp/bot/
+
+Tools: resolve_merchant_tool (bank descriptor to restaurant), lookup_program, estimate_missed, annotate_transaction, ask_rewards, list_signup, list_merchants. All are read-only.
+
+What it never does: it never signs anyone up for a program, never asks for or stores names, phone numbers, emails or card numbers, and does not keep what you send. An "unknown" answer means no data, not "no program". Rewards are not retroactive.
